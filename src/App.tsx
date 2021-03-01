@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import { RadioContext } from './context/radioContext';
+import { IRadio } from './types/radioTypes';
+import Map from './components/Map';
 
 function App() {
+  const [radios, setRadios] = useState<IRadio[]>([]);
+  const [selectedRadio, setSelectedRadio] = useState<IRadio | null>(null);
+  const [error, setError] = useState(false);
+
+  const fetchRadios = () => {
+    fetch('/radios')
+      .then((res) => res.json())
+      .then((data) => setRadios(data))
+      .catch((err) => setError(true));
+  };
+
+  useEffect(() => {
+    fetchRadios();
+    setInterval(fetchRadios, 5000);
+  }, []);
+
+  useEffect(() => {
+    console.log(selectedRadio);
+  }, [selectedRadio]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RadioContext.Provider value={{ radios, selectedRadio, setSelectedRadio }}>
+      <div className="App">
+        <Map />
+      </div>
+    </RadioContext.Provider>
   );
 }
 
