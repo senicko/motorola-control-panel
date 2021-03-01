@@ -20,10 +20,6 @@ function App() {
     setInterval(fetchRadios, 5000);
   }, []);
 
-  useEffect(() => {
-    console.log(selectedRadio);
-  }, [selectedRadio]);
-
   return (
     <RadioContext.Provider value={{ radios, selectedRadio, setSelectedRadio }}>
       <div className="App">

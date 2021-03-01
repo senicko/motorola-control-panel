@@ -1,4 +1,4 @@
-import { IRadio } from "../types/radioTypes";
+import { IRadio } from '../types/radioTypes';
 
 export class RadioEntity {
   radio: IRadio;
