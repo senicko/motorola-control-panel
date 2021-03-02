@@ -1,27 +1,16 @@
-import '../scss/map.scss';
+import { Map as LeafletMap } from 'leaflet';
 import { useContext, useState } from 'react';
-import { MapContainer, Marker, TileLayer } from 'react-leaflet';
-import { LeafletMouseEvent, Map as LeafletMap } from 'leaflet';
+import { MapContainer, Polyline, TileLayer } from 'react-leaflet';
 import { RadioContext } from '../context/radioContext';
-import { renderMarker } from '../util/renderMarker';
-import MapMarker from './MapMarker';
-import { IRadio } from '../types/radioTypes';
+import '../scss/map.scss';
+import RadioMarkerLayer from './RadioMarkerLayer';
+import RadioDistanceLayer from './RadioDistanceLayer';
 
 const Map = () => {
   const attribution =
     '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors';
   const url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-  const { radios, selectedRadio, setSelectedRadio } = useContext(RadioContext);
-  const [map, setMap] = useState<LeafletMap | null>(null);
-
-  const handleMarkerClick = (e: LeafletMouseEvent, radio: IRadio) => {
-    setSelectedRadio!(radio);
-    if (map)
-      map.flyTo([
-        parseFloat(radio.Position.Lat),
-        parseFloat(radio.Position.Lon),
-      ]);
-  };
+  const [map, setMap] = useState<LeafletMap>();
 
   return (
     <MapContainer
@@ -31,24 +20,8 @@ const Map = () => {
       whenCreated={setMap}
     >
       <TileLayer attribution={attribution} url={url} />
-      {radios.map((radio, i) => (
-        <Marker
-          position={[
-            parseFloat(radio.Position.Lat),
-            parseFloat(radio.Position.Lon),
-          ]}
-          icon={renderMarker(
-            <MapMarker
-              selected={radio.Id === selectedRadio?.Id}
-              radio={radio}
-            />
-          )}
-          eventHandlers={{
-            click: (e) => handleMarkerClick(e, radio),
-          }}
-          key={i}
-        />
-      ))}
+      <RadioMarkerLayer map={map} />
+      <RadioDistanceLayer />
     </MapContainer>
   );
 };

@@ -5,6 +5,7 @@
 }
 
 .marker {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,5 +16,16 @@
 
   &--selected {
     background: white;
+  }
+
+  &__distance {
+    position: absolute;
+    width: 100%;
+    background: white;
+    top: -30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

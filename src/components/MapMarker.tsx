@@ -4,16 +4,14 @@ import { getColorFromPercentage } from '../util/getColorFromPercentage';
 import TypePortable from '@material-ui/icons/LocalShipping';
 import TypeCar from '@material-ui/icons/PhoneAndroid';
 import TypeBaseStation from '@material-ui/icons/Storage';
-import WorkingModeData from '@material-ui/icons/RssFeed';
-import WorkingModeVoice from '@material-ui/icons/PhoneInTalk';
-import WorkingModeIdle from '@material-ui/icons/Snooze';
+import { parseRadioPosition } from '../util/parseRadioPosition';
 
 interface MapMarkerProps {
   radio: IRadio;
-  selected: boolean;
+  selectedRadio: IRadio | undefined;
 }
 
-const MapMarker = ({ radio, selected }: MapMarkerProps) => {
+const MapMarker = ({ radio, selectedRadio }: MapMarkerProps) => {
   const getTypeIcon = (type: string) => {
     switch (type) {
       case 'Portable':
@@ -29,11 +27,24 @@ const MapMarker = ({ radio, selected }: MapMarkerProps) => {
 
   return (
     <span
-      className={`marker ${selected ? 'marker--selected' : ''}`}
+      className={`marker ${
+        selectedRadio?.Id === radio.Id ? 'marker--selected' : ''
+      }`}
       style={{
-        background: !selected ? getColorFromPercentage(health) : '',
+        background:
+          selectedRadio?.Id !== radio.Id ? getColorFromPercentage(health) : '',
       }}
     >
+      {selectedRadio && selectedRadio.Id !== radio.Id && (
+        <div className="marker__distance">
+          {(
+            parseRadioPosition(radio).distanceTo(
+              parseRadioPosition(selectedRadio)
+            ) / 1000
+          ).toFixed(2)}{' '}
+          km
+        </div>
+      )}
       {getTypeIcon(radio.Type)}
     </span>
   );
