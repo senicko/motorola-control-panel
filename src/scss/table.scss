@@ -23,6 +23,11 @@ $table-text-color: #ddd;
     transition: 0.1s ease-in-out;
     border-bottom: 1px solid #292929;
 
+    &--selected {
+      background: #2d2d2d;
+      cursor: pointer;
+    }
+
     &:hover {
       background: #2d2d2d;
       cursor: pointer;

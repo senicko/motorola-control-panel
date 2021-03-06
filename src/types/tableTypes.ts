@@ -1,13 +1,13 @@
 import { ReactElement } from 'react';
 
-export interface TableColumn {
+export interface ITableColumn {
   name: string;
   width: number;
 }
 
-export type TableCell = (string | ReactElement)[];
+export type ITableCell = (string | ReactElement)[];
 
-export interface TableRow {
-  fields: TableCell[];
+export interface ITableRow {
+  fields: ITableCell[];
   value: any;
 }
