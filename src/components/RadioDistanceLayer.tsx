@@ -7,7 +7,7 @@ const RadioDistanceLayer = () => {
 
   const unselectedRadios = useMemo(
     () => radios.filter((radio) => radio.Id !== selectedRadio?.Id),
-    [radios]
+    [radios, selectedRadio]
   );
 
   return (
@@ -24,7 +24,7 @@ const RadioDistanceLayer = () => {
             ]}
             key={i}
             weight={2}
-            color="black"
+            color="#888"
             dashArray="10"
           />
         ))}

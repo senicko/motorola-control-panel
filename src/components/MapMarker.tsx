@@ -24,6 +24,8 @@ const MapMarker = ({ radio, selectedRadio }: MapMarkerProps) => {
   };
 
   const health = (radio.BatteryLevel + radio.Strength * 10) / 2;
+  const deviceHealthColor =
+    selectedRadio?.Id !== radio.Id ? getColorFromPercentage(health) : '';
 
   return (
     <span
@@ -31,8 +33,8 @@ const MapMarker = ({ radio, selectedRadio }: MapMarkerProps) => {
         selectedRadio?.Id === radio.Id ? 'marker--selected' : ''
       }`}
       style={{
-        background:
-          selectedRadio?.Id !== radio.Id ? getColorFromPercentage(health) : '',
+        background: deviceHealthColor,
+        boxShadow: `0 0 25px -5px ${deviceHealthColor}`,
       }}
     >
       {selectedRadio && selectedRadio.Id !== radio.Id && (

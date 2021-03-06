@@ -20,12 +20,16 @@
 
   &__distance {
     position: absolute;
-    width: 100%;
-    background: white;
-    top: -30px;
+    width: 150%;
+    background: #222;
+    color: white;
+    top: -40px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 2px;
+    font-weight: 600;
+    font-size: 16px;
   }
 }

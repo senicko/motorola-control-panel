@@ -1,5 +1,5 @@
 import { LeafletEvent, Map } from 'leaflet';
-import { FunctionComponent, useContext } from 'react';
+import { FunctionComponent, useContext, useEffect } from 'react';
 import { Marker } from 'react-leaflet';
 import MapMarker from '../components/MapMarker';
 import { RadioContext } from '../context/radioContext';
@@ -18,10 +18,8 @@ const RadioMarkerLayer: FunctionComponent<RadioMarkerLayerProps> = ({
     RadioContext
   );
 
-  const handleMarkerClick = (e: LeafletEvent, radio: IRadio) => {
+  const handleMarkerClick = (e: LeafletEvent, radio: IRadio) =>
     setSelectedRadioId!(radio.Id);
-    if (map) map.flyTo(parseRadioPosition(radio));
-  };
 
   return (
     <>

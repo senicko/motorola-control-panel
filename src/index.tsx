@@ -3,10 +3,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { RadioContextProvider } from './context/radioContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RadioContextProvider>
+      <App />
+    </RadioContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
