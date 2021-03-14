@@ -1,43 +1,35 @@
-$table-background: #222;
-$table-text-color: #ddd;
+$cell-color: #333;
+$cell-header-color: #444;
+$text-color: #ccc;
 
 .table {
-  width: 50%;
-  height: 100vh;
-  background: $table-background;
-  font-size: 16px;
-  color: $table-text-color;
-  overflow-y: scroll;
-
-  &__header {
-    position: sticky;
-    top: 0;
-    display: flex;
-    padding: 20px 40px;
-    background: #2d2d2d;
-  }
+  border-collapse: collapse;
+  width: 100%;
 
   &__row {
-    display: flex;
-    padding: 20px 40px;
-    transition: 0.1s ease-in-out;
-    border-bottom: 1px solid #292929;
-
+    background: $cell-color;
     &--selected {
-      background: #2d2d2d;
-      cursor: pointer;
-    }
-
-    &:hover {
-      background: #2d2d2d;
-      cursor: pointer;
+      background: $cell-header-color;
     }
   }
-}
 
-@media (max-width: 1565px) {
-  .table {
-    width: 100%;
-    height: 40vh;
+  &__cell {
+    white-space: nowrap;
+    color: $text-color;
+    text-align: left;
+    user-select: none;
+    cursor: pointer;
+    padding: 20px 20px;
+    border-bottom: 1px solid $cell-header-color;
+
+    & > * {
+      vertical-align: middle;
+    }
+
+    &--header {
+      background: $cell-header-color;
+      position: sticky;
+      top: 0;
+    }
   }
 }

@@ -1,0 +1,13 @@
+.radio-table {
+  height: 50vh;
+  width: 100vw;
+  background: #333;
+  overflow-y: scroll;
+}
+
+@media (min-width: 1565px) {
+  .radio-table {
+    width: 50vw;
+    height: 100vh;
+  }
+}

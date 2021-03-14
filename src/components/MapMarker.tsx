@@ -1,10 +1,8 @@
 import '../scss/marker.scss';
 import { IRadio } from '../types/radioTypes';
-import { getColorFromPercentage } from '../util/getColorFromPercentage';
-import TypePortable from '@material-ui/icons/LocalShipping';
-import TypeCar from '@material-ui/icons/PhoneAndroid';
-import TypeBaseStation from '@material-ui/icons/Storage';
+import { getColorFromPercentage } from '../util/icons';
 import { parseRadioPosition } from '../util/parseRadioPosition';
+import { typeIconFactory } from '../util/icons';
 
 interface MapMarkerProps {
   radio: IRadio;
@@ -12,18 +10,9 @@ interface MapMarkerProps {
 }
 
 const MapMarker = ({ radio, selectedRadio }: MapMarkerProps) => {
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case 'Portable':
-        return <TypePortable />;
-      case 'Car':
-        return <TypeCar />;
-      case 'BaseStation':
-        return <TypeBaseStation />;
-    }
-  };
-
+  // Get health value
   const health = (radio.BatteryLevel + radio.Strength * 10) / 2;
+  // Get device health color
   const deviceHealthColor =
     selectedRadio?.Id !== radio.Id ? getColorFromPercentage(health) : '';
 
@@ -47,7 +36,7 @@ const MapMarker = ({ radio, selectedRadio }: MapMarkerProps) => {
           km
         </div>
       )}
-      {getTypeIcon(radio.Type)}
+      {typeIconFactory(radio)}
     </span>
   );
 };

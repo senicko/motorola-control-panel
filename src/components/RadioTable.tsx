@@ -1,52 +1,68 @@
-import { useMemo, useContext, useState, useEffect } from 'react';
+import '../scss/radioTable.scss';
+import { useContext } from 'react';
+import Table from './Table';
 import { RadioContext } from '../context/radioContext';
 import { IRadio } from '../types/radioTypes';
-import Table from './Table';
+import { ITableHeader } from '../types/tableTypes';
+import {
+  batteryIconFactory,
+  strengthIconFactory,
+  typeIconFactory,
+  workingModeIconFactory,
+} from '../util/icons';
+
+// Headers for table
+const headers: ITableHeader[] = [
+  {
+    title: 'Id',
+    key: 'Id',
+  },
+  {
+    title: 'Name',
+    key: 'Name',
+  },
+  {
+    title: 'Serial Number',
+    key: 'SerialNumber',
+  },
+  {
+    title: 'Type',
+    key: 'Type',
+    componentFactory: typeIconFactory,
+  },
+  {
+    title: 'Strength',
+    key: 'Strength',
+    componentFactory: strengthIconFactory,
+  },
+  {
+    title: 'Battery Level',
+    key: 'BatteryLevel',
+    componentFactory: batteryIconFactory,
+  },
+  {
+    title: 'Working Mode',
+    key: 'WorkingMode',
+    componentFactory: workingModeIconFactory,
+  },
+];
 
 const RadioTable = () => {
-  const { radios, setSelectedRadioId } = useContext(RadioContext);
-
-  // Declare table columns titles
-  const columns = [
-    { name: 'ID', width: 100 },
-    { name: 'Name', width: 150 },
-    { name: 'Type', width: 150 },
-    { name: 'SerialNumber', width: 300 },
-    { name: 'Strength', width: 150 },
-    { name: 'Battery Level', width: 150 },
-    { name: 'Working Mode', width: 150 },
-  ];
-
-  // Convert radios to table row format
-  const rows = useMemo(
-    () =>
-      radios.reduce(
-        (acc, curr) => [
-          ...acc,
-          {
-            fields: [
-              curr.Id,
-              curr.Name,
-              curr.Type,
-              curr.SerialNumber,
-              curr.Strength,
-              curr.BatteryLevel,
-              curr.WorkingMode,
-            ],
-            value: curr,
-          },
-        ],
-        [] as any[]
-      ),
-    [radios]
+  // Get radios data from Context
+  const { radios, setSelectedRadioId, selectedRadio } = useContext(
+    RadioContext
   );
 
   return (
-    <Table
-      columns={columns}
-      rows={rows}
-      onRowClick={(value: IRadio) => setSelectedRadioId!(value.Id)}
-    />
+    <section className="radio-table">
+      <Table
+        headers={headers}
+        rows={radios}
+        compareWith="Id"
+        selected={selectedRadio}
+        onRowClick={(value: IRadio) => setSelectedRadioId!(value.Id)}
+      />
+    </section>
   );
 };
 
