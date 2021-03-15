@@ -1,46 +1,100 @@
-# Getting Started with Create React App
+dd- [**Dokumentacja**](#dokumentacja)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- [Dokumentacja](#dokumentacja)
+  - [Wstęp](#wstęp)
+    - [_Co to i dla kogo?_](#co-to-i-dla-kogo)
+  - [Opis funkcjonalności](#opis-funkcjonalności)
+    - [_Mapa urządzeń w sieci_](#mapa-urządzeń-w-sieci)
+    - [_Tabela_](#tabela)
+  - [Część techniczna](#część-techniczna)
+    - [_Używane technologie_](#używane-technologie)
+    - [_Opis poszczególnych komponentów_](#opis-poszczególnych-komponentów)
+    - [Map](#map)
 
-## Available Scripts
+<br/>
 
-In the project directory, you can run:
+# Dokumentacja
 
-### `yarn start`
+## Wstęp
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<br/>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### _Co to i dla kogo?_
 
-### `yarn test`
+Konsola operatorska to aplikacja webowa pozwalająca na monitorowanie stanu urządzeń w sieci. Jest ona kierowana do Operatorów sieci łączności.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br/>
 
-### `yarn build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Opis funkcjonalności
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br/>
 
-### `yarn eject`
+### _Mapa urządzeń w sieci_
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Aplikacja posiada mapę oraz tabelę, które umożliwają wygodne śledzenie oraz monitorowanie urządzeń znajdujących się w sieci. Mapa informuje o pozycji, ogólnym stanie technicznym urządzenia oraz ich typie. Kliknięcie w ikonę skutkuje zaznaczeniem urządzenia oraz wyświetleniem jego odległości do reszty.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br/>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### _Tabela_
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Tabela urządzeń dostarcza szczegółowych informacji na ich temat. Znadują się w niej
 
-## Learn More
+- Id
+- Nazwa
+- Numer Seryjny
+- Typ
+- Siła zasięgu
+- Poziom baterii
+- tryb pracy
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+konkretnych urządzeń. Dane można sortować `malejąco` i `rosnąco`. Tabela umożliwia zaznaczanie urządzeń, co skutkuje zaznaczeniem go na mapie.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br/>
+
+---
+
+<br/>
+
+## Część techniczna
+
+<br/>
+
+### _Używane technologie_
+
+- [`React`](https://reactjs.org/) - Framework (biblioteka) frontend
+- [`typescript`](https://www.typescriptlang.org/) - Superset języka jacascript
+- [`material-ui`](https://material-ui.com/) - Biblioteka UI do frameworka [`React`](https://reactjs.org/) (W tym przypadku tylko i wyłącznie ikony)
+- [`leaflet.js`](https://leafletjs.com/)
+- [`react-leaflet.js](https://react-leaflet.js.org/)
+
+<br/>
+
+### _Opis poszczególnych komponentów_
+
+<br/>
+
+### Map
+
+```ts
+const Map = () => {
+  return (
+    <MapContainer center={[50.0647, 19.945]} zoom={12} className="map">
+      <TileLayer attribution={attribution} url={url} />
+      <RadioMarkerLayer />
+      <RadioDistanceLayer />
+    </MapContainer>
+  );
+};
+```
+
+`Map` to wrapper dla mapy stworzonej poprzez [`leaflet.js`](https://leafletjs.com/). Zdjęcia dla mapy pochodzą od serwisu [`mapbox`](https://www.mapbox.com/), który jest darmowy tylko do pewnego momentu, lecz oferuje ładniejsze kafle mapy.
+Centrum mapy ustawione jest na koordynaty `50.0647, 19.945` (Centrum Krakowa). Jako dzieci komponentu przekazane są
+
+- `RadioMarkerLayer` (Warstwa z ikonami urządzeń)
+- `RadioDistanceLayer` (Warstwa wyświetlająca linie odległości w momencie gdy jakieś urządzenie jest wybrane)
+
+_Opis każdego z tych komponentów znajdzie się w dalszej części dokumentacji_

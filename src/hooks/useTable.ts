@@ -27,7 +27,7 @@ export const useTable = ({ rows, headers }: UseTableProps) => {
       });
     // Otherwise return unmodified data
     else return rows;
-  }, [asc, key, rows, headers]);
+  }, [asc, key, rows]);
 
   // Handle change of sorting
   const handleKeyChange = (header: any) => {

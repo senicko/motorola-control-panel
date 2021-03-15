@@ -1,25 +1,16 @@
-import { LeafletEvent, Map } from 'leaflet';
-import { FunctionComponent, useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { Marker } from 'react-leaflet';
 import MapMarker from '../components/MapMarker';
 import { RadioContext } from '../context/radioContext';
 import { IRadio } from '../types/radioTypes';
-import { parseRadioPosition } from '../util/parseRadioPosition';
 import { renderMarker } from '../util/renderMarker';
 
-interface RadioMarkerLayerProps {
-  map: Map | undefined;
-}
-
-const RadioMarkerLayer: FunctionComponent<RadioMarkerLayerProps> = ({
-  map,
-}) => {
+const RadioMarkerLayer = () => {
   const { radios, selectedRadio, setSelectedRadioId } = useContext(
     RadioContext
   );
 
-  const handleMarkerClick = (e: LeafletEvent, radio: IRadio) =>
-    setSelectedRadioId!(radio.Id);
+  const handleMarkerClick = (radio: IRadio) => setSelectedRadioId!(radio.Id);
 
   return (
     <>
@@ -34,7 +25,7 @@ const RadioMarkerLayer: FunctionComponent<RadioMarkerLayerProps> = ({
               <MapMarker selectedRadio={selectedRadio} radio={radio} />
             )}
             eventHandlers={{
-              click: (e) => handleMarkerClick(e, radio),
+              click: (e) => handleMarkerClick(radio),
             }}
             key={i}
           />

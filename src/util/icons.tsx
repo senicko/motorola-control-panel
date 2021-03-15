@@ -68,7 +68,7 @@ export const strengthIconFactory = (radio: IRadio) => {
   // Get color for network strength
   const color = getColorFromPercentage(radio.Strength * 10);
   // Get proper icon
-  const Icon = strengthIconOrder[Math.ceil(radio.Strength / 2) - 1];
+  const Icon = strengthIconOrder[Math.ceil(radio.Strength / 2.5)];
   // Return icon
   return <Icon style={{ color }} />;
 };
@@ -81,7 +81,7 @@ export const batteryIconFactory = (radio: IRadio) => {
   // Get color for battery level
   const color = getColorFromPercentage(radio.BatteryLevel);
   // Get proper icon
-  const Icon = batteryIconOrder[Math.ceil(radio.BatteryLevel / 20) - 1];
+  const Icon = batteryIconOrder[Math.ceil(radio.BatteryLevel / 25)];
   // Return icon
   return <Icon style={{ color }} />;
 };

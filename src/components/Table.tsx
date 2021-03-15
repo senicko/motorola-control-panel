@@ -1,5 +1,5 @@
 import '../scss/table.scss';
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { useTable } from '../hooks/useTable';
 import { ReactComponent as ASC } from '../sort-asc.svg';
 import { ReactComponent as DESC } from '../sort-desc.svg';
@@ -28,9 +28,9 @@ const Table: FC<TableProps> = ({
 
   const renderCell = (row: IRadio, column: ITableHeader) => {
     // If coumn have componentFactory get it's component
-    if (column.componentFactory) return column.componentFactory!(row);
+    if (column.componentFactory) return column.componentFactory(row);
     // Otherwise field value
-    return <span>{getKeyValue(row, column.key)}</span>;
+    return getKeyValue(row, column.key);
   };
 
   return (

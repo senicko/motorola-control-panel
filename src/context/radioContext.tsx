@@ -12,7 +12,7 @@ import { IRadio } from '../types/radioTypes';
 interface IRadioContext {
   radios: IRadio[];
   selectedRadio?: IRadio;
-  setSelectedRadioId?: Dispatch<SetStateAction<string | undefined>>;
+  setSelectedRadioId?: Dispatch<SetStateAction<number | undefined>>;
 }
 
 export const RadioContext = createContext<IRadioContext>({
@@ -21,7 +21,7 @@ export const RadioContext = createContext<IRadioContext>({
 
 export const RadioContextProvider: FunctionComponent = ({ children }) => {
   const [radios, setRadios] = useState<IRadio[]>([]);
-  const [selectedRadioId, setSelectedRadioId] = useState<string>();
+  const [selectedRadioId, setSelectedRadioId] = useState<number>();
 
   const selectedRadio = useMemo(
     () => radios.find((radio) => radio.Id === selectedRadioId),
@@ -30,7 +30,7 @@ export const RadioContextProvider: FunctionComponent = ({ children }) => {
 
   const radioContextProviderValue = useMemo(
     () => ({ radios, selectedRadio, setSelectedRadioId }),
-    [radios, selectedRadioId]
+    [radios, selectedRadio]
   );
 
   const fetchRadios = () => {
