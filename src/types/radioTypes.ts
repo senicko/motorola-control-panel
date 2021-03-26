@@ -7,7 +7,7 @@ export interface IRadioPosition {
 }
 
 export interface IRadio {
-  Id: string;
+  Id: number;
   Name: string;
   Type: TRadioType;
   SerialNumber: string;

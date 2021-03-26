@@ -18,6 +18,7 @@ const MapMarker = ({ radio, selectedRadio }: MapMarkerProps) => {
 
   return (
     <span
+      data-testid="test-marker"
       className={`marker ${
         selectedRadio?.Id === radio.Id ? 'marker--selected' : ''
       }`}

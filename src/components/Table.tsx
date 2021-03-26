@@ -29,9 +29,8 @@ const Table: FC<TableProps> = ({
   const renderCell = (row: IRadio, column: ITableHeader) => {
     // If coumn have componentFactory get it's component
     if (column.componentFactory) return column.componentFactory(row);
-
     // Otherwise field value
-    return <span>{getKeyValue(row, column.key)}</span>;
+    return getKeyValue(row, column.key);
   };
 
   return (

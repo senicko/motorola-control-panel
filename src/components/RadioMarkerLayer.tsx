@@ -1,4 +1,3 @@
-import { LeafletEvent } from 'leaflet';
 import { useContext } from 'react';
 import { Marker } from 'react-leaflet';
 import MapMarker from '../components/MapMarker';
@@ -11,8 +10,7 @@ const RadioMarkerLayer = () => {
     RadioContext
   );
 
-  const handleMarkerClick = (e: LeafletEvent, radio: IRadio) =>
-    setSelectedRadioId!(radio.Id);
+  const handleMarkerClick = (radio: IRadio) => setSelectedRadioId!(radio.Id);
 
   return (
     <>
@@ -27,7 +25,7 @@ const RadioMarkerLayer = () => {
               <MapMarker selectedRadio={selectedRadio} radio={radio} />
             )}
             eventHandlers={{
-              click: (e) => handleMarkerClick(e, radio),
+              click: (e) => handleMarkerClick(radio),
             }}
             key={i}
           />
