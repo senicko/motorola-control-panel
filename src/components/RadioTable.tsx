@@ -49,12 +49,19 @@ const headers: ITableHeader[] = [
 
 const RadioTable = () => {
   // Get radios data from Context
-  const { radios, setSelectedRadioId, selectedRadio } = useContext(
+  const { radios, setSelectedRadioId, selectedRadio, connError } = useContext(
     RadioContext
   );
 
   return (
     <section className="radio-table">
+      <div
+        className={`connection-status ${
+          connError ? 'connection-status--danger' : 'connection-status--success'
+        }`}
+      >
+        {connError ? 'Problem with connection!' : 'Connected to the server'}
+      </div>
       <Table
         headers={headers}
         rows={radios}

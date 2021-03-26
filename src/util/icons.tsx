@@ -39,6 +39,8 @@ export const typeIconFactory = (radio: IRadio) => {
       return <TypeCar />;
     case 'BaseStation':
       return <TypeBaseStation />;
+    default:
+      return <span></span>;
   }
 };
 
@@ -51,6 +53,8 @@ export const workingModeIconFactory = (radio: IRadio) => {
       return <Idle />;
     case 'Voice':
       return <Voice />;
+    default:
+      return <span></span>;
   }
 };
 
@@ -67,8 +71,11 @@ const strengthIconOrder = [
 export const strengthIconFactory = (radio: IRadio) => {
   // Get color for network strength
   const color = getColorFromPercentage(radio.Strength * 10);
+
   // Get proper icon
-  const Icon = strengthIconOrder[Math.ceil(radio.Strength / 2) - 1];
+  const Icon =
+    strengthIconOrder[Math.max(Math.ceil(radio.Strength / 2) - 1, 0)];
+
   // Return icon
   return <Icon style={{ color }} />;
 };
@@ -82,6 +89,7 @@ export const batteryIconFactory = (radio: IRadio) => {
   const color = getColorFromPercentage(radio.BatteryLevel);
   // Get proper icon
   const Icon = batteryIconOrder[Math.ceil(radio.BatteryLevel / 20) - 1];
+
   // Return icon
   return <Icon style={{ color }} />;
 };

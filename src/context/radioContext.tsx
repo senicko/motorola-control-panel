@@ -11,16 +11,22 @@ import { IRadio } from '../types/radioTypes';
 
 interface IRadioContext {
   radios: IRadio[];
+  connError: boolean;
   selectedRadio?: IRadio;
-  setSelectedRadioId?: Dispatch<SetStateAction<string | undefined>>;
+  setSelectedRadioId: Dispatch<SetStateAction<string | undefined>>;
 }
 
 export const RadioContext = createContext<IRadioContext>({
   radios: [],
+  connError: false,
+  setSelectedRadioId: (() => {}) as Dispatch<
+    SetStateAction<string | undefined>
+  >,
 });
 
 export const RadioContextProvider: FunctionComponent = ({ children }) => {
   const [radios, setRadios] = useState<IRadio[]>([]);
+  const [connError, setConnError] = useState(false);
   const [selectedRadioId, setSelectedRadioId] = useState<string>();
 
   const selectedRadio = useMemo(
@@ -29,14 +35,20 @@ export const RadioContextProvider: FunctionComponent = ({ children }) => {
   );
 
   const radioContextProviderValue = useMemo(
-    () => ({ radios, selectedRadio, setSelectedRadioId }),
-    [radios, selectedRadioId]
+    () => ({ radios, selectedRadio, connError, setSelectedRadioId }),
+    [radios, selectedRadio, selectedRadioId, connError]
   );
 
   const fetchRadios = () => {
     fetch('/radios')
       .then((res) => res.json())
-      .then((data) => setRadios(data));
+      .then((data) => {
+        setRadios(data);
+        setConnError(false);
+      })
+      .catch(() => {
+        setConnError(true);
+      });
 
     setTimeout(fetchRadios, 5000);
   };

@@ -29,7 +29,7 @@ $text-color: #ccc;
     &--header {
       background: $cell-header-color;
       position: sticky;
-      top: 0;
+      top: 30px;
     }
   }
 }

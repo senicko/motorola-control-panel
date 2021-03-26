@@ -5,6 +5,27 @@
   overflow-y: scroll;
 }
 
+.connection-status {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  height: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 10px;
+  color: white;
+
+  &--success {
+    background: rgb(64, 168, 64);
+  }
+
+  &--danger {
+    background: #e03131;
+  }
+}
+
 @media (min-width: 1565px) {
   .radio-table {
     width: 50vw;
