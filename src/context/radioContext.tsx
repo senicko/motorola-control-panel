@@ -13,21 +13,21 @@ interface IRadioContext {
   radios: IRadio[];
   connError: boolean;
   selectedRadio?: IRadio;
-  setSelectedRadioId: Dispatch<SetStateAction<string | undefined>>;
+  setSelectedRadioId: Dispatch<SetStateAction<number | undefined>>;
 }
 
 export const RadioContext = createContext<IRadioContext>({
   radios: [],
   connError: false,
   setSelectedRadioId: (() => {}) as Dispatch<
-    SetStateAction<string | undefined>
+    SetStateAction<number | undefined>
   >,
 });
 
 export const RadioContextProvider: FunctionComponent = ({ children }) => {
   const [radios, setRadios] = useState<IRadio[]>([]);
   const [connError, setConnError] = useState(false);
-  const [selectedRadioId, setSelectedRadioId] = useState<string>();
+  const [selectedRadioId, setSelectedRadioId] = useState<number>();
 
   const selectedRadio = useMemo(
     () => radios.find((radio) => radio.Id === selectedRadioId),

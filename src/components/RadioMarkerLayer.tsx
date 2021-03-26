@@ -10,7 +10,7 @@ const RadioMarkerLayer = () => {
     RadioContext
   );
 
-  const handleMarkerClick = (radio: IRadio) => setSelectedRadioId!(radio.Id);
+  const handleMarkerClick = (radio: IRadio) => setSelectedRadioId(radio.Id);
 
   return (
     <>
