@@ -1,4 +1,5 @@
 - [Dokumentacja](#dokumentacja)
+  - [Włączanie projektu](#włączanie-projektu)
   - [Wstęp](#wstęp)
     - [_Co to_](#co-to)
   - [Opis funkcjonalności](#opis-funkcjonalności)
@@ -28,6 +29,14 @@
 
 # Dokumentacja
 
+## Włączanie projektu
+
+Instalowanie bibliotek
+`npm i`
+
+Włączenie projektu
+`npm run start`
+
 ## Wstęp
 
 <br/>
@@ -48,7 +57,7 @@ Konsola operatorska to aplikacja webowa pozwalająca na monitorowanie stanu urz�
 
 ### _Mapa urządzeń w sieci_
 
-Aplikacja posiada mapę oraz tabelę, które umożliwają wygodne śledzenie oraz monitorowanie urządzeń znajdujących się w sieci. Mapa informuje o pozycji, ogólnym stanie technicznym urządzenia oraz ich typie. Kliknięcie w ikonę skutkuje zaznaczeniem urządzenia oraz wyświetleniem jego odległości do reszty.
+Aplikacja posiada mapę oraz tabelę, które umożliwają wygodne śledzenie oraz monitorowanie urządzeń znajdujących się w sieci. Mapa informuje o pozycji, ogólnym stanie technicznym urządzenia oraz ich typie. Kliknięcie w ikonę skutkuje zaznaczeniem urządzenia oraz wyświetleniem jego odległości do reszty. Tabela dostarcza dokładnych informacji na temat urządzenia. Kliknięcie w wiersz tabeli zaznacza urządzenie.
 
 <br/>
 
