@@ -9,11 +9,20 @@
     - [Przechowywanie danych](#przechowywanie-danych)
   - [_Opis poszczególnych komponentów_](#opis-poszczególnych-komponentów)
     - [Komponent Map (`src/components/Map.tsx`)](#komponent-map-srccomponentsmaptsx)
+    - [Komponent MapMarker (`src/components/MapMarker.tsx`)](#komponent-mapmarker-srccomponentsmapmarkertsx)
     - [Komponent RadioMarkerLayer (`src/components/RadioMarkerLayer.tsx`)](#komponent-radiomarkerlayer-srccomponentsradiomarkerlayertsx)
     - [Komponent RadioDistanceLayer (`src/components/RadioDistanceLayer.tsx`)](#komponent-radiodistancelayer-srccomponentsradiodistancelayertsx)
     - [Komponent RadioTable (`src/components/RadioTable.tsx`)](#komponent-radiotable-srccomponentsradiotabletsx)
     - [Komponent Table (`src/components/Table.tsx`)](#komponent-table-srccomponentstabletsx)
   - [Funkcje pomocnicze](#funkcje-pomocnicze)
+    - [getColorFromPercentage (src/util/icons.tsx)](#getcolorfrompercentage-srcutiliconstsx)
+    - [typeIconFactory (src/util/icons.tsx)](#typeiconfactory-srcutiliconstsx)
+    - [workingModeIconFactory (src/util/icons.tsx)](#workingmodeiconfactory-srcutiliconstsx)
+    - [strengthIconFactory (src/util/icons.tsx)](#strengthiconfactory-srcutiliconstsx)
+    - [batteryIconFactory (src/util/icons.tsx)](#batteryiconfactory-srcutiliconstsx)
+    - [getKeyValue (src/util/objects.ts)](#getkeyvalue-srcutilobjectsts)
+    - [parseRadioPosition (src/util/parseRadioPosition.ts)](#parseradioposition-srcutilparseradiopositionts)
+    - [renderMarker (src/util/renderMarker.ts)](#rendermarker-srcutilrendermarkerts)
 
 <br/>
 
@@ -96,6 +105,21 @@ Dane (Informacje o urządzeniach z sieci) przechowywane są za pomocą funkcjona
 <br/>
 <br/>
 
+### Komponent MapMarker (`src/components/MapMarker.tsx`)
+
+`MapMarker` to komponent definiujący pojedyńczy znacznik na mapie. Poza wyrenderowaniem ikonki urządzenia (Jego typu), komponent oblicz również jego zdrowie, przy którego pomocy otrzymywany jest kolor odpowiadający zdrowiu urządzenia w sieci.
+
+Wzór na zdrowie:
+
+```
+(battery + signalStrength * 10) / 2
+```
+
+Wzór ten na równo traktuje poziom baterii i siłę zasięgu.
+
+<br/>
+<br/>
+
 ### Komponent RadioMarkerLayer (`src/components/RadioMarkerLayer.tsx`)
 
 `RadioMarkerLayer` nakłada ikony urządzeń w sieci na mapę stworzoną przez bibliotekę `react-leaflet`. W aplikacji jest przekazywany jako dziecko komponentu `Map`. Dane o urządzeniach pobiera z `context'u`.
@@ -130,3 +154,51 @@ Komponent do sortowania danych użwa customowego hooka `useTable`. Następnie po
 <br/>
 
 ## Funkcje pomocnicze
+
+<br/>
+
+### getColorFromPercentage (src/util/icons.tsx)
+
+Funkcja zwraca kolor odpowiadający podanemu procentowi (0% - czerwony, 100% - zielony)
+
+<br/>
+
+### typeIconFactory (src/util/icons.tsx)
+
+Funkcja zwracająca ikonę w zależności od typu urządzenia.
+
+<br/>
+
+### workingModeIconFactory (src/util/icons.tsx)
+
+Funkcja zwracająca ikonę w zależności od trybu pracy urządzenia.
+
+<br/>
+
+### strengthIconFactory (src/util/icons.tsx)
+
+Funkcja zwraca ikonę w kolorze odpowiadającym stanie siły zasięgu podanego urządzenia (0 - czerwony, 10 - zielony).
+
+<br/>
+
+### batteryIconFactory (src/util/icons.tsx)
+
+Funkcja zwraca ikonę w kolorze odpowiadającym stanie baterii podanego urządzenia (0 - czerwony, 100 - zielony).
+
+<br/>
+
+### getKeyValue (src/util/objects.ts)
+
+Funkcja zwraca wartość podanego pola w podanym obiekcie. Jeżeli pole nie istnieje funkcja zwraca pusty string.
+
+<br/>
+
+### parseRadioPosition (src/util/parseRadioPosition.ts)
+
+Funkcja tworzy obiekt pozycji, zdefiniowany w bibliotece [`leaflet.js`](https://leafletjs.com/), danego urządzenia.
+
+<br/>
+
+### renderMarker (src/util/renderMarker.ts)
+
+Funkcja jako parametr pobiera komponent i zwraca ikonę (typu `DivIcon`) z biblioteki [`leaflet.js`](https://leafletjs.com/)
