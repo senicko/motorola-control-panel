@@ -88,7 +88,9 @@ export const batteryIconFactory = (radio: IRadio) => {
   // Get color for battery level
   const color = getColorFromPercentage(radio.BatteryLevel);
   // Get proper icon
-  const Icon = batteryIconOrder[Math.ceil(radio.BatteryLevel / 20) - 1];
+  const Icon = batteryIconOrder[Math.ceil(radio.BatteryLevel / 25)];
+
+  console.log(Icon);
 
   // Return icon
   return <Icon style={{ color }} />;

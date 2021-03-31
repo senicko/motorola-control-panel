@@ -37,6 +37,8 @@ Instalowanie bibliotek
 Włączenie projektu
 `npm run start`
 
+_Projekt włącza się w wersji developerskiej, ponieważ dostarczony serwer nie ustawia nagłówka `Access-Control-Allow-Origin`_
+
 ## Wstęp
 
 <br/>
